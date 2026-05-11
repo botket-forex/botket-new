@@ -19,9 +19,13 @@ export default function Home() {
           <a href="#" className="hover:text-cyan-400 transition">Contact</a>
         </div>
 
-        <button className="bg-gradient-to-r from-cyan-500 to-purple-600 px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
-          Start Trading
-        </button>
+        <a
+          href="https://wa.me/447448315610"
+          target="_blank"
+          className="bg-gradient-to-r from-cyan-500 to-purple-600 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
+        >
+          WhatsApp
+        </a>
       </nav>
 
       {/* Hero Section */}
@@ -44,9 +48,13 @@ export default function Home() {
 
         <div className="flex flex-col md:flex-row gap-6 mt-12">
 
-          <button className="bg-gradient-to-r from-cyan-500 to-purple-600 px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition shadow-2xl shadow-cyan-500/20">
+          <a
+            href="https://wa.me/447448315610"
+            target="_blank"
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition shadow-2xl shadow-cyan-500/20"
+          >
             Get Started
-          </button>
+          </a>
 
           <button className="border border-white/20 px-10 py-5 rounded-full text-xl font-semibold hover:bg-white/10 transition">
             How To Use
@@ -150,9 +158,13 @@ export default function Home() {
             to trade smarter, faster, and more efficiently.
           </p>
 
-          <button className="mt-12 bg-gradient-to-r from-cyan-500 to-purple-600 px-12 py-6 rounded-full text-2xl font-bold hover:scale-105 transition shadow-2xl shadow-purple-500/20">
-            Join BOTKET Now
-          </button>
+          <a
+            href="https://wa.me/447448315610"
+            target="_blank"
+            className="inline-block mt-12 bg-gradient-to-r from-cyan-500 to-purple-600 px-12 py-6 rounded-full text-2xl font-bold hover:scale-105 transition shadow-2xl shadow-purple-500/20"
+          >
+            Contact On WhatsApp
+          </a>
 
         </div>
 
