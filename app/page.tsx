@@ -52,9 +52,9 @@ export default function Home() {
         </h1>
 
         <p className="text-gray-300 text-xl md:text-2xl max-w-3xl mt-8 leading-9">
-          Advanced AI trading signals, live forex insights, automated strategies,
-          and intelligent risk management tools built for modern traders.
-        </p>
+  Advanced AI trading signals, live forex insights, automated strategies,
+  and intelligent risk management tools built for modern traders.
+</p>
 
         <div className="flex flex-col md:flex-row gap-6 mt-12">
 
