@@ -13,8 +13,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-
-        {/* Meta Pixel Code */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -32,6 +30,10 @@ export default function RootLayout({
             `,
           }}
         />
+      </head>
+
+      <body>
+        {children}
 
         <noscript>
           <img
@@ -41,10 +43,7 @@ export default function RootLayout({
             src="https://www.facebook.com/tr?id=1009132421667353&ev=PageView&noscript=1"
           />
         </noscript>
-
-      </head>
-
-      <body>{children}</body>
+      </body>
     </html>
   );
 }
