@@ -56,4 +56,13 @@ export default function Home() {
 
     </main>
   );
-}
+}<section className="py-20 text-center">
+  <h2 className="text-4xl font-bold mb-6">
+    Why Choose BOTKET?
+  </h2>
+
+  <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+    BOTKET combines AI-powered market analysis with real-time forex
+    execution tools to help traders make smarter decisions faster.
+  </p>
+</section>
