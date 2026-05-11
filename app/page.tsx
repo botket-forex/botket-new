@@ -1,6 +1,3 @@
-# Replace your entire `app/page.tsx` with this professional colorful version
-
-```tsx
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white overflow-hidden">
@@ -192,14 +189,3 @@ export default function Home() {
     </main>
   );
 }
-```
-
-After replacing the code:
-
-```bash
-git add .
-git commit -m "professional colorful homepage"
-git push
-```
-
-Then refresh your website after 20–30 seconds.
