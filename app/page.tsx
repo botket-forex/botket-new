@@ -3,177 +3,154 @@ export default function Home() {
     <main className="min-h-screen bg-black text-white overflow-hidden">
 
       {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600 rounded-full blur-[180px] opacity-30" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-[180px] opacity-30" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/20 blur-[150px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/20 blur-[150px] rounded-full"></div>
 
       {/* Navbar */}
-      <nav className="relative z-10 flex items-center justify-between px-8 md:px-16 py-6 border-b border-white/10 backdrop-blur-lg">
-
-        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
-          BOTKET
+      <nav className="relative z-10 flex items-center justify-between px-8 py-6 border-b border-white/10 backdrop-blur-md">
+        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+          BOTKET FOREX
         </h1>
 
-        <div className="hidden md:flex gap-8 text-lg text-gray-300">
-          <a href="#" className="hover:text-cyan-400 transition">
-            Home
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            Features
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            Pricing
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            Contact
-          </a>
+        <div className="hidden md:flex gap-8 text-gray-300 font-medium">
+          <a href="#" className="hover:text-cyan-400 transition">Home</a>
+          <a href="#" className="hover:text-cyan-400 transition">Features</a>
+          <a href="#" className="hover:text-cyan-400 transition">Pricing</a>
+          <a href="#" className="hover:text-cyan-400 transition">Contact</a>
         </div>
 
         <button className="bg-gradient-to-r from-cyan-500 to-purple-600 px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
-          Login
+          Start Trading
         </button>
-
       </nav>
 
-      {/* Hero */}
-      <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-32 md:py-40">
+      {/* Hero Section */}
+      <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-32">
 
-        <div className="mb-6 px-5 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 text-sm tracking-wide">
-          AI Powered Forex Trading Platform
+        <div className="mb-6 px-5 py-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-300 text-sm">
+          #1 Smart Forex Automation Platform
         </div>
 
         <h1 className="text-6xl md:text-8xl font-black leading-tight max-w-6xl">
-          Trade Smarter with
-          <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 text-transparent bg-clip-text">
+          <span className="bg-gradient-to-r from-white via-cyan-300 to-purple-400 bg-clip-text text-transparent">
             BOTKET FOREX
           </span>
         </h1>
 
         <p className="text-gray-300 text-xl md:text-2xl max-w-3xl mt-8 leading-9">
-  Advanced AI trading signals, live forex insights, automated strategies,
-  and intelligent risk management tools built for modern traders.
-</p>
+          We provide an automatic EURUSD trading bot that works directly on MT4.
+          Click below to learn how to use the bot, set it up, and start automated trading.
+        </p>
 
         <div className="flex flex-col md:flex-row gap-6 mt-12">
 
-          <button className="bg-gradient-to-r from-cyan-500 to-purple-600 px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition duration-300 shadow-2xl shadow-cyan-500/30">
-            Start Trading
+          <button className="bg-gradient-to-r from-cyan-500 to-purple-600 px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition shadow-2xl shadow-cyan-500/20">
+            Get Started
           </button>
 
-          <button className="border border-white/20 bg-white/5 backdrop-blur-lg px-10 py-5 rounded-full text-xl hover:bg-white/10 transition">
-            Watch Demo
+          <button className="border border-white/20 px-10 py-5 rounded-full text-xl font-semibold hover:bg-white/10 transition">
+            How To Use
           </button>
+
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 w-full max-w-5xl">
+
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-lg">
+            <h2 className="text-4xl font-black text-cyan-400">98%</h2>
+            <p className="text-gray-400 mt-2">Win Accuracy</p>
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-lg">
+            <h2 className="text-4xl font-black text-purple-400">24/7</h2>
+            <p className="text-gray-400 mt-2">Bot Trading</p>
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-lg">
+            <h2 className="text-4xl font-black text-cyan-400">MT4</h2>
+            <p className="text-gray-400 mt-2">Platform Support</p>
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-lg">
+            <h2 className="text-4xl font-black text-purple-400">AI</h2>
+            <p className="text-gray-400 mt-2">Powered Strategy</p>
+          </div>
 
         </div>
 
       </section>
 
       {/* Features */}
-      <section className="relative z-10 px-8 md:px-16 py-24 grid md:grid-cols-3 gap-8">
+      <section className="relative z-10 px-8 py-24">
 
-        <div className="bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:-translate-y-2 transition duration-300">
-          <div className="text-5xl mb-6">📈</div>
-
-          <h2 className="text-3xl font-bold mb-4">
-            Live Signals
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl font-black">
+            Powerful Features
           </h2>
 
-          <p className="text-gray-400 text-lg leading-8">
-            Get real-time forex signals powered by advanced AI market prediction systems.
+          <p className="text-gray-400 mt-6 text-xl">
+            Everything you need for automated forex trading.
           </p>
         </div>
 
-        <div className="bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:-translate-y-2 transition duration-300">
-          <div className="text-5xl mb-6">🤖</div>
+        <div className="grid md:grid-cols-3 gap-10">
 
-          <h2 className="text-3xl font-bold mb-4">
-            AI Automation
-          </h2>
+          <div className="bg-white/5 border border-white/10 rounded-[30px] p-10 hover:border-cyan-400/40 transition backdrop-blur-lg">
+            <div className="text-5xl mb-6">📈</div>
 
-          <p className="text-gray-400 text-lg leading-8">
-            Automate trading strategies with machine-learning powered execution tools.
-          </p>
-        </div>
+            <h3 className="text-3xl font-bold mb-5">
+              Live Signals
+            </h3>
 
-        <div className="bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:-translate-y-2 transition duration-300">
-          <div className="text-5xl mb-6">🛡️</div>
+            <p className="text-gray-400 text-lg leading-8">
+              Receive real-time EURUSD forex signals powered by advanced AI analysis.
+            </p>
+          </div>
 
-          <h2 className="text-3xl font-bold mb-4">
-            Risk Protection
-          </h2>
+          <div className="bg-white/5 border border-white/10 rounded-[30px] p-10 hover:border-purple-400/40 transition backdrop-blur-lg">
+            <div className="text-5xl mb-6">🤖</div>
 
-          <p className="text-gray-400 text-lg leading-8">
-            Intelligent stop-loss systems and portfolio protection for safer trading.
-          </p>
+            <h3 className="text-3xl font-bold mb-5">
+              Automated MT4 Bot
+            </h3>
+
+            <p className="text-gray-400 text-lg leading-8">
+              Fully automated MT4 trading bot designed for hands-free execution.
+            </p>
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-[30px] p-10 hover:border-cyan-400/40 transition backdrop-blur-lg">
+            <div className="text-5xl mb-6">🛡️</div>
+
+            <h3 className="text-3xl font-bold mb-5">
+              Risk Management
+            </h3>
+
+            <p className="text-gray-400 text-lg leading-8">
+              Protect your capital with intelligent stop-loss and trade management.
+            </p>
+          </div>
+
         </div>
 
       </section>
 
-      {/* Stats */}
-      <section className="relative z-10 px-8 md:px-16 py-20 grid md:grid-cols-4 gap-8 text-center">
+      {/* CTA Section */}
+      <section className="relative z-10 px-8 pb-32">
 
-        <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/20 rounded-3xl p-10">
-          <h3 className="text-6xl font-black text-cyan-400 mb-4">
-            99%
-          </h3>
+        <div className="max-w-6xl mx-auto bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10 rounded-[40px] p-16 text-center backdrop-blur-lg">
 
-          <p className="text-gray-300 text-lg">
-            Accuracy Rate
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/10 border border-purple-500/20 rounded-3xl p-10">
-          <h3 className="text-6xl font-black text-purple-400 mb-4">
-            24/7
-          </h3>
-
-          <p className="text-gray-300 text-lg">
-            AI Monitoring
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/10 border border-green-500/20 rounded-3xl p-10">
-          <h3 className="text-6xl font-black text-green-400 mb-4">
-            10K+
-          </h3>
-
-          <p className="text-gray-300 text-lg">
-            Active Traders
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-br from-orange-500/20 to-red-500/10 border border-orange-500/20 rounded-3xl p-10">
-          <h3 className="text-6xl font-black text-orange-400 mb-4">
-            $5M+
-          </h3>
-
-          <p className="text-gray-300 text-lg">
-            Daily Volume
-          </p>
-        </div>
-
-      </section>
-
-      {/* CTA */}
-      <section className="relative z-10 px-8 md:px-16 py-32 text-center">
-
-        <div className="max-w-5xl mx-auto bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-white/10 rounded-[40px] p-16 backdrop-blur-2xl">
-
-          <h2 className="text-5xl md:text-7xl font-black leading-tight mb-8">
-            Ready to Level Up
-            <span className="block bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
-              Your Trading?
-            </span>
+          <h2 className="text-5xl md:text-6xl font-black leading-tight">
+            Ready To Automate Your Trading?
           </h2>
 
-          <p className="text-gray-300 text-xl md:text-2xl leading-9 max-w-3xl mx-auto mb-12">
-            Join thousands of traders using BOTKET to analyze markets,
-            automate trades, and maximize profits.
+          <p className="text-gray-300 text-xl mt-8 max-w-3xl mx-auto leading-9">
+            Join BOTKET FOREX and start using our automated EURUSD MT4 bot
+            to trade smarter, faster, and more efficiently.
           </p>
 
-          <button className="bg-gradient-to-r from-cyan-500 to-purple-600 px-12 py-6 rounded-full text-2xl font-bold hover:scale-105 transition duration-300 shadow-2xl shadow-purple-500/30">
+          <button className="mt-12 bg-gradient-to-r from-cyan-500 to-purple-600 px-12 py-6 rounded-full text-2xl font-bold hover:scale-105 transition shadow-2xl shadow-purple-500/20">
             Join BOTKET Now
           </button>
 
