@@ -1,6 +1,7 @@
 import "./globals.css";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "BOTKET FOREX",
   description: "Learn automated forex trading with MT4 bots",
 };
@@ -41,6 +42,7 @@ export default function RootLayout({
             width="1"
             style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=1009132421667353&ev=PageView&noscript=1"
+            alt=""
           />
         </noscript>
       </body>
