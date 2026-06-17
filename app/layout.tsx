@@ -1,11 +1,6 @@
 import "./globals.css";
 import Script from "next/script";
 
-export const metadata = {
-  title: "Botket Forex",
-  description: "Learn automated forex trading with MT4 bots",
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -15,8 +10,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
 
-        {/* Meta Pixel Code */}
-        <Script id="facebook-pixel" strategy="afterInteractive">
+        {/* NEW META PIXEL */}
+        <Script
+          id="facebook-pixel"
+          strategy="afterInteractive"
+        >
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -30,30 +28,31 @@ export default function RootLayout({
             t.async=!0;
             t.src=v;
             s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}
-            (window, document,'script',
+            s.parentNode.insertBefore(t,s)
+            }(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '1009132421667353');
+            fbq('init', '2010235913702166');
             fbq('track', 'PageView');
           `}
         </Script>
 
-        {/* End Meta Pixel Code */}
-
       </head>
 
       <body>
+
         <noscript>
           <img
             height="1"
             width="1"
             style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1009132421667353&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=2010235913702166&ev=PageView&noscript=1"
+            alt=""
           />
         </noscript>
 
         {children}
+
       </body>
     </html>
   );
