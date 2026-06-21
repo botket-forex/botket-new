@@ -32,11 +32,12 @@ export default function JoinPage() {
           </p>
 
           <a
-            href="https://whatsapp.com/channel/0029VbD29LnG8l5KKPC6jr1C"
+            href="https://t.me/+VJY9pRj8AlQ3ODc1"
+            href=""
             target="_blank"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl text-xl font-black"
           >
-            Join Free Whatsapp Channel
+            Join Free telegram channel
           </a>
 
         </div>
