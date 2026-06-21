@@ -6,7 +6,6 @@ export default function JoinPage() {
 
       {/* HERO */}
       <section className="py-24 px-6">
-
         <div className="max-w-5xl mx-auto text-center">
 
           <Image
@@ -33,20 +32,18 @@ export default function JoinPage() {
 
           <a
             href="https://t.me/+VJY9pRj8AlQ3ODc1"
-            href=""
             target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl text-xl font-black"
           >
-            Join Free telegram channel
+            Join Free Telegram Channel
           </a>
 
         </div>
-
       </section>
 
       {/* DEMO VIDEO */}
       <section className="py-20 px-6 bg-blue-50">
-
         <div className="max-w-6xl mx-auto text-center">
 
           <h2 className="text-4xl font-black mb-10">
@@ -61,12 +58,10 @@ export default function JoinPage() {
           </video>
 
         </div>
-
       </section>
 
       {/* RESULTS */}
       <section className="py-20 px-6">
-
         <div className="max-w-7xl mx-auto text-center">
 
           <h2 className="text-5xl font-black mb-6">
@@ -114,12 +109,10 @@ export default function JoinPage() {
           </div>
 
         </div>
-
       </section>
 
       {/* FEATURES */}
       <section className="py-20 px-6 bg-blue-50">
-
         <div className="max-w-6xl mx-auto">
 
           <h2 className="text-center text-5xl font-black mb-16">
@@ -129,7 +122,6 @@ export default function JoinPage() {
           <div className="grid md:grid-cols-3 gap-8">
 
             <div className="bg-white p-8 rounded-3xl shadow-lg">
-
               <h3 className="text-2xl font-black mb-4">
                 AI Trend Detection
               </h3>
@@ -137,11 +129,9 @@ export default function JoinPage() {
               <p className="text-gray-600">
                 Advanced market analysis for EUR/USD entries.
               </p>
-
             </div>
 
             <div className="bg-white p-8 rounded-3xl shadow-lg">
-
               <h3 className="text-2xl font-black mb-4">
                 Smart Risk Management
               </h3>
@@ -149,11 +139,9 @@ export default function JoinPage() {
               <p className="text-gray-600">
                 Automated protection against excessive drawdowns.
               </p>
-
             </div>
 
             <div className="bg-white p-8 rounded-3xl shadow-lg">
-
               <h3 className="text-2xl font-black mb-4">
                 24/7 Automation
               </h3>
@@ -161,18 +149,15 @@ export default function JoinPage() {
               <p className="text-gray-600">
                 BOTKET monitors markets continuously.
               </p>
-
             </div>
 
           </div>
 
         </div>
-
       </section>
 
       {/* TESTIMONIALS */}
       <section className="py-20 px-6">
-
         <div className="max-w-6xl mx-auto">
 
           <h2 className="text-center text-5xl font-black mb-16">
@@ -182,30 +167,21 @@ export default function JoinPage() {
           <div className="grid md:grid-cols-3 gap-8">
 
             <div className="bg-blue-50 p-8 rounded-3xl">
-              <p className="mb-6">
-                ⭐⭐⭐⭐⭐
-              </p>
-
+              <p className="mb-6">⭐⭐⭐⭐⭐</p>
               <p className="text-gray-700">
                 Very smooth MT4 integration and setup.
               </p>
             </div>
 
             <div className="bg-blue-50 p-8 rounded-3xl">
-              <p className="mb-6">
-                ⭐⭐⭐⭐⭐
-              </p>
-
+              <p className="mb-6">⭐⭐⭐⭐⭐</p>
               <p className="text-gray-700">
                 Great AI trading automation experience.
               </p>
             </div>
 
             <div className="bg-blue-50 p-8 rounded-3xl">
-              <p className="mb-6">
-                ⭐⭐⭐⭐⭐
-              </p>
-
+              <p className="mb-6">⭐⭐⭐⭐⭐</p>
               <p className="text-gray-700">
                 Excellent risk management and execution.
               </p>
@@ -214,12 +190,10 @@ export default function JoinPage() {
           </div>
 
         </div>
-
       </section>
 
       {/* FINAL CTA */}
       <section className="py-24 px-6 bg-blue-600 text-white">
-
         <div className="max-w-4xl mx-auto text-center">
 
           <h2 className="text-5xl font-black mb-8">
@@ -233,20 +207,18 @@ export default function JoinPage() {
           <a
             href="https://t.me/+VJY9pRj8AlQ3ODc1"
             target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-white text-blue-600 px-10 py-5 rounded-2xl text-xl font-black"
           >
             Join Telegram Now
           </a>
 
         </div>
-
       </section>
 
       {/* DISCLAIMER */}
       <section className="py-10 px-6 text-center text-gray-500 text-sm">
-
         Forex trading involves risk. Past performance does not guarantee future results.
-
       </section>
 
     </main>
