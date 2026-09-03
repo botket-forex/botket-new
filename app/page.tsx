@@ -1,599 +1,358 @@
-"use client";
+'use client';
 
-import Image from "next/image";
+import { useState } from 'react';
 
-export default function Home() {
+export default function Page() {
+  const [tab, setTab] = useState<'forex' | 'general'>('forex');
+
   return (
-    <main className="min-h-screen bg-white text-black overflow-hidden">
+    <>
+      <style>{`
+        :root{
+          --ink:#10131a; --panel:#171c26; --panel-2:#1d2330; --line:#2b3242;
+          --paper:#eeeae1; --paper-dim:#b9b6ad; --amber:#e8a33d; --cyan:#5fd4c4;
+        }
+        .bk *{box-sizing:border-box;}
+        .bk{
+          background:var(--ink); color:var(--paper);
+          font-family:'Space Grotesk', sans-serif; line-height:1.5;
+        }
+        .bk .mono{font-family:'IBM Plex Mono', monospace;}
+        .bk a{color:inherit; text-decoration:none;}
+        .bk :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+        @media (prefers-reduced-motion: reduce){
+          .bk *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+        }
+        .bk .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+        .bk header{position:sticky; top:0; z-index:50; background:rgba(16,19,26,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+        .bk .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
+        .bk .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:19px; letter-spacing:-0.01em;}
+        .bk .brand .dot{width:9px; height:9px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan);}
+        .bk .navlinks{display:flex; gap:28px; font-size:14.5px; color:var(--paper-dim);}
+        .bk .navlinks a:hover{color:var(--paper);}
+        .bk .navcta{background:var(--amber); color:#181205; font-weight:600; font-size:14px; padding:9px 16px; border-radius:3px;}
+        .bk .navcta:hover{background:#f0b357;}
+        @media (max-width:820px){ .bk .navlinks{display:none;} }
+        .bk .hero{padding:88px 0 72px; border-bottom:1px solid var(--line);
+          background:radial-gradient(1200px 500px at 85% -10%, rgba(95,212,196,0.10), transparent 60%);}
+        .bk .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
+        @media (max-width:900px){ .bk .hero-grid{grid-template-columns:1fr;} }
+        .bk .hero h1{font-size:46px; line-height:1.1; letter-spacing:-0.015em; margin:0 0 20px; font-weight:700;}
+        .bk .hero p.lede{font-size:17px; color:var(--paper-dim); max-width:46ch; margin:0 0 32px;}
+        .bk .hero-ctas{display:flex; gap:12px; flex-wrap:wrap;}
+        .bk .btn{display:inline-block; padding:13px 22px; border-radius:3px; font-weight:600; font-size:15px; border:1px solid transparent; transition:background .15s ease, border-color .15s ease; cursor:pointer;}
+        .bk .btn-primary{background:var(--amber); color:#181205;}
+        .bk .btn-primary:hover{background:#f0b357;}
+        .bk .btn-ghost{border-color:var(--line); color:var(--paper); background:none; font-family:inherit;}
+        .bk .btn-ghost:hover{border-color:var(--paper-dim);}
+        .bk .console{background:var(--panel); border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+        .bk .console-head{display:flex; align-items:center; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--line); font-size:12.5px; color:var(--paper-dim);}
+        .bk .live{display:flex; align-items:center; gap:6px; color:var(--cyan);}
+        .bk .live .p{width:6px; height:6px; border-radius:50%; background:var(--cyan); animation:bkpulse 1.6s infinite;}
+        @keyframes bkpulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+        .bk .console-row{display:flex; align-items:center; justify-content:space-between; padding:12px 16px; font-size:13.5px; border-bottom:1px solid var(--line);}
+        .bk .console-row:last-child{border-bottom:none;}
+        .bk .console-row .loc{color:var(--paper);}
+        .bk .console-row .ms{color:var(--cyan); font-weight:600;}
+        .bk section{padding:72px 0;}
+        .bk .sec-head{max-width:56ch; margin-bottom:40px;}
+        .bk .sec-head h2{font-size:30px; letter-spacing:-0.01em; margin:0 0 10px; font-weight:700;}
+        .bk .sec-head p{color:var(--paper-dim); font-size:15.5px; margin:0;}
+        .bk .tabs{display:flex; gap:8px; margin-bottom:36px; border-bottom:1px solid var(--line);}
+        .bk .tab-btn{background:none; border:none; color:var(--paper-dim); font-family:inherit; font-size:15px; font-weight:600; padding:12px 4px; margin-right:24px; cursor:pointer; border-bottom:2px solid transparent; transition:color .15s ease;}
+        .bk .tab-btn.active{color:var(--paper); border-color:var(--amber);}
+        .bk .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+        @media (max-width:820px){ .bk .plans{grid-template-columns:1fr;} }
+        .bk .plan{background:var(--panel); padding:28px; display:flex; flex-direction:column;}
+        .bk .plan.featured{background:var(--panel-2);}
+        .bk .plan-name{font-size:13px; color:var(--amber); margin-bottom:6px; font-weight:600;}
+        .bk .plan-price{font-size:32px; font-weight:700; margin:0 0 2px;}
+        .bk .plan-price span{font-size:14px; color:var(--paper-dim); font-weight:500;}
+        .bk .plan-note{font-size:12.5px; color:var(--paper-dim); margin-bottom:22px;}
+        .bk .specs{list-style:none; padding:0; margin:0 0 24px; font-size:13.5px;}
+        .bk .specs li{display:flex; justify-content:space-between; padding:9px 0; border-top:1px solid var(--line);}
+        .bk .specs li:first-child{border-top:none;}
+        .bk .specs .k{color:var(--paper-dim);}
+        .bk .specs .v{font-family:'IBM Plex Mono', monospace; font-size:12.5px;}
+        .bk .plan .btn{margin-top:auto; text-align:center;}
+        .bk .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+        @media (max-width:820px){ .bk .feat-grid{grid-template-columns:1fr 1fr;} }
+        @media (max-width:560px){ .bk .feat-grid{grid-template-columns:1fr;} }
+        .bk .feat{background:var(--panel); padding:24px;}
+        .bk .feat .k{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--cyan); margin-bottom:10px;}
+        .bk .feat h3{font-size:16px; margin:0 0 8px; font-weight:600;}
+        .bk .feat p{font-size:13.5px; color:var(--paper-dim); margin:0;}
+        .bk .loc-table{width:100%; border-collapse:collapse; font-size:14px;}
+        .bk .loc-table th{text-align:left; font-weight:500; color:var(--paper-dim); font-size:12.5px; padding:10px 12px; border-bottom:1px solid var(--line);}
+        .bk .loc-table td{padding:14px 12px; border-bottom:1px solid var(--line);}
+        .bk .loc-table td.mono{color:var(--cyan);}
+        .bk .loc-table tr:last-child td{border-bottom:none;}
+        .bk .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+        @media (max-width:820px){ .bk .steps{grid-template-columns:1fr 1fr;} }
+        @media (max-width:520px){ .bk .steps{grid-template-columns:1fr;} }
+        .bk .step{border-top:1px solid var(--line); padding-top:16px;}
+        .bk .step .num{font-family:'IBM Plex Mono', monospace; color:var(--amber); font-size:13px; margin-bottom:10px;}
+        .bk .step h3{font-size:15.5px; margin:0 0 6px; font-weight:600;}
+        .bk .step p{font-size:13.5px; color:var(--paper-dim); margin:0;}
+        .bk .faq-item{border-top:1px solid var(--line); padding:18px 0;}
+        .bk .faq-item:last-child{border-bottom:1px solid var(--line);}
+        .bk .faq-item summary{cursor:pointer; font-size:15.5px; font-weight:600; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+        .bk .faq-item summary::-webkit-details-marker{display:none;}
+        .bk .faq-item summary .ind{color:var(--paper-dim); font-family:'IBM Plex Mono', monospace;}
+        .bk .faq-item p{font-size:14.5px; color:var(--paper-dim); margin:12px 0 0; max-width:64ch;}
+        .bk .contact-band{background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:40px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;}
+        .bk .contact-band h2{font-size:24px; margin:0 0 8px; font-weight:700;}
+        .bk .contact-band p{margin:0; color:var(--paper-dim); font-size:14.5px;}
+        .bk .contact-links{display:flex; gap:12px; flex-wrap:wrap;}
+        .bk footer{border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--paper-dim);}
+        .bk .foot-row{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+      `}</style>
 
-      {/* BACKGROUND */}
-      <div className="fixed inset-0 -z-10">
+      <div className="bk">
+        <header>
+          <div className="nav wrap">
+            <div className="brand"><span className="dot"></span>BOTKET VPS</div>
+            <nav className="navlinks">
+              <a href="#plans">Plans</a>
+              <a href="#locations">Locations</a>
+              <a href="#deploy">How it works</a>
+              <a href="#faq">FAQ</a>
+              <a href="#contact">Contact</a>
+            </nav>
+            <a className="navcta" href="https://wa.me/447448315610">Order on WhatsApp</a>
+          </div>
+        </header>
 
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.05)_1px,transparent_1px)] bg-[size:70px_70px]" />
-
-        <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-500/20 blur-[150px] rounded-full" />
-
-      </div>
-
-      {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 w-full z-50 border-b border-blue-100 backdrop-blur-xl bg-white/80">
-
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-          {/* LOGO */}
-          <div className="flex items-center gap-4">
-
-            <Image
-              src="/logo.png"
-              alt="BOTKET"
-              width={55}
-              height={55}
-              className="rounded-full"
-            />
-
+        <section className="hero">
+          <div className="wrap hero-grid">
             <div>
+              <h1>Servers that don&apos;t blink when your trade needs to fire.</h1>
+              <p className="lede">BOTKET VPS gives EA and MT4/MT5 traders sub-millisecond routes to major brokers — and gives everyone else a fast, no-fuss server for apps, bots, and sites. Pick your lane below.</p>
+              <div className="hero-ctas">
+                <a className="btn btn-primary" href="#plans">See plans</a>
+                <a className="btn btn-ghost" href="https://wa.me/447448315610">Talk to us</a>
+              </div>
+            </div>
+            <div className="console">
+              <div className="console-head">
+                <span>Live latency — sample routes</span>
+                <span className="live"><span className="p"></span>LIVE</span>
+              </div>
+              <div className="console-row"><span className="loc">London (Equinix LD4)</span><span className="ms mono">0.8 ms</span></div>
+              <div className="console-row"><span className="loc">New York (NY4)</span><span className="ms mono">1.1 ms</span></div>
+              <div className="console-row"><span className="loc">Singapore</span><span className="ms mono">1.4 ms</span></div>
+              <div className="console-row"><span className="loc">Mumbai</span><span className="ms mono">2.0 ms</span></div>
+            </div>
+          </div>
+        </section>
 
-              <h1 className="text-2xl font-black text-blue-600 tracking-wide">
-                BOTKET
-              </h1>
-
-              <p className="text-xs text-gray-500">
-                AI Forex Automation
-              </p>
-
+        <section id="plans">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2>Two kinds of fast</h2>
+              <p>Same infrastructure underneath. Trading VPS is tuned for uptime and broker latency; general VPS is priced for everyday hosting.</p>
             </div>
 
-          </div>
-
-          {/* NAVIGATION */}
-          <div className="hidden md:flex gap-6 items-center text-gray-700 font-medium">
-
-            <a href="#features" className="hover:text-blue-600 transition">
-              Features
-            </a>
-
-            <a href="#pricing" className="hover:text-blue-600 transition">
-              Pricing
-            </a>
-
-            <a href="#register" className="hover:text-blue-600 transition">
-              Register
-            </a>
-
-            <a href="#faq" className="hover:text-blue-600 transition">
-              FAQ
-            </a>
-
-            <a href="#contact" className="hover:text-blue-600 transition">
-              Contact
-            </a>
-
-            <a
-              href="/strategy.pdf"
-              target="_blank"
-              className="bg-blue-600 text-white px-5 py-2 rounded-full font-bold hover:bg-blue-700 transition"
-            >
-              Strategy PDF
-            </a>
-
-          </div>
-
-          {/* TOP WHATSAPP */}
-          <a
-            href="https://wa.me/447448315610"
-            target="_blank"
-            className="bg-blue-600 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition"
-          >
-            WhatsApp
-          </a>
-
-        </div>
-
-      </nav>
-
-      {/* HERO */}
-      <section className="min-h-screen flex items-center px-6 pt-32">
-
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-
-          {/* LEFT */}
-          <div>
-
-            <div className="inline-flex items-center gap-2 border border-blue-200 bg-blue-50 px-5 py-2 rounded-full text-blue-600 mb-8 font-semibold">
-              ⚡ AI Powered EUR/USD Trading
+            <div className="tabs">
+              <button className={`tab-btn ${tab === 'forex' ? 'active' : ''}`} onClick={() => setTab('forex')}>Forex Trading VPS</button>
+              <button className={`tab-btn ${tab === 'general' ? 'active' : ''}`} onClick={() => setTab('general')}>General Purpose VPS</button>
             </div>
 
-            <h1 className="text-6xl md:text-7xl font-black leading-tight mb-8 text-black">
-              Trade Smarter
-              <br />
-              With
-              <span className="text-blue-600">
-                {" "}AI Precision
-              </span>
-            </h1>
-
-            <p className="text-gray-600 text-xl leading-relaxed max-w-xl mb-10">
-              BOTKET automates forex trading using advanced AI analysis,
-              smart risk management, and real-time execution strategies.
-            </p>
-
-            <div className="flex flex-wrap gap-5">
-
-              <a
-                href="https://wa.me/447448315610"
-                target="_blank"
-                className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition"
-              >
-                Start Trading
-              </a>
-
-              <a
-                href="#features"
-                className="border border-blue-200 bg-white px-8 py-4 rounded-2xl hover:bg-blue-50 transition"
-              >
-                Learn More
-              </a>
-
-            </div>
-
-          </div>
-
-          {/* RIGHT */}
-          <div className="relative">
-
-            <div className="absolute inset-0 bg-blue-500/20 blur-[120px] rounded-full" />
-
-            <div className="relative bg-white border border-gray-200 rounded-[40px] p-8 shadow-2xl">
-
-              <div className="flex items-center justify-between mb-8">
-
-                <div>
-
-                  <h2 className="text-2xl font-bold text-black">
-                    AI Dashboard
-                  </h2>
-
-                  <p className="text-gray-500">
-                    Real-time analytics
-                  </p>
-
+            {tab === 'forex' && (
+              <div className="plans">
+                <div className="plan">
+                  <div className="plan-name">Starter</div>
+                  <div className="plan-price">₹699<span>/mo</span></div>
+                  <div className="plan-note">Good for 1–2 EAs on a single pair</div>
+                  <ul className="specs">
+                    <li><span className="k">vCPU</span><span className="v">1 core</span></li>
+                    <li><span className="k">RAM</span><span className="v">2 GB</span></li>
+                    <li><span className="k">Storage</span><span className="v">40 GB NVMe</span></li>
+                    <li><span className="k">OS</span><span className="v">Windows Server</span></li>
+                    <li><span className="k">MT4/MT5 setup</span><span className="v">Included</span></li>
+                  </ul>
+                  <a className="btn btn-ghost" href="https://wa.me/447448315610">Order Starter</a>
                 </div>
-
-                <div className="bg-blue-600 text-white px-4 py-2 rounded-full font-bold">
-                  LIVE
+                <div className="plan featured">
+                  <div className="plan-name">Trader</div>
+                  <div className="plan-price">₹1,299<span>/mo</span></div>
+                  <div className="plan-note">Most traders running multiple EAs pick this</div>
+                  <ul className="specs">
+                    <li><span className="k">vCPU</span><span className="v">2 cores</span></li>
+                    <li><span className="k">RAM</span><span className="v">4 GB</span></li>
+                    <li><span className="k">Storage</span><span className="v">80 GB NVMe</span></li>
+                    <li><span className="k">OS</span><span className="v">Windows Server</span></li>
+                    <li><span className="k">MT4/MT5 setup</span><span className="v">Included</span></li>
+                  </ul>
+                  <a className="btn btn-primary" href="https://wa.me/447448315610">Order Trader</a>
                 </div>
-
-              </div>
-
-              {/* CHART */}
-              <div className="h-[300px] rounded-3xl bg-blue-50 border border-blue-100 relative overflow-hidden">
-
-                <Image
-                  src="/chart.png"
-                  alt="Trading Chart"
-                  fill
-                  className="object-cover rounded-3xl"
-                />
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* DEMO VIDEO */}
-      <section className="py-32 px-6 bg-blue-50">
-
-        <div className="max-w-6xl mx-auto text-center">
-
-          <div className="inline-flex items-center gap-2 border border-blue-200 bg-white px-5 py-2 rounded-full text-blue-600 mb-8 font-semibold">
-            🎥 Live Trading Demo
-          </div>
-
-          <h2 className="text-5xl font-black mb-14 text-black">
-            Watch BOTKET In Action
-          </h2>
-
-          <div className="bg-white border border-gray-200 rounded-[40px] p-6 shadow-2xl overflow-hidden">
-
-            <video
-              className="w-full rounded-[30px]"
-              controls
-            >
-              <source src="/demo.mp4" type="video/mp4" />
-            </video>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* RESULTS */}
-      <section className="py-32 px-6 bg-white">
-
-        <div className="max-w-7xl mx-auto text-center">
-
-          <div className="inline-flex items-center gap-2 border border-blue-200 bg-blue-50 px-5 py-2 rounded-full text-blue-600 mb-8 font-semibold">
-            📈 Live Trading Results
-          </div>
-
-          <h2 className="text-5xl font-black mb-6 text-black">
-            Last Week Results
-          </h2>
-
-          <p className="text-gray-500 text-xl max-w-3xl mx-auto mb-16">
-            Real MT4 trading performance powered by BOTKET AI automation.
-          </p>
-
-          {/* BUTTONS */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            <a
-              href="/results-1.png"
-              target="_blank"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-2xl text-xl font-black transition shadow-xl"
-            >
-              Week Result 1
-            </a>
-
-            <a
-              href="/results-2.png"
-              target="_blank"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-2xl text-xl font-black transition shadow-xl"
-            >
-              Week Result 2
-            </a>
-
-            <a
-              href="/results-3.png"
-              target="_blank"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-2xl text-xl font-black transition shadow-xl"
-            >
-              Week Result 3
-            </a>
-
-            <a
-              href="/results-4.png"
-              target="_blank"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-2xl text-xl font-black transition shadow-xl"
-            >
-              Week Result 4
-            </a>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* FEATURES */}
-      <section id="features" className="py-32 px-6 bg-blue-50">
-
-        <div className="max-w-7xl mx-auto">
-
-          <div className="text-center mb-20">
-
-            <h2 className="text-5xl font-black mb-6 text-black">
-              Why BOTKET
-            </h2>
-
-            <p className="text-gray-500 text-xl">
-              Advanced AI trading infrastructure
-            </p>
-
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-
-            <div className="bg-white border border-gray-200 rounded-[30px] p-10 shadow-sm">
-
-              <div className="text-5xl mb-6">
-                ⚡
-              </div>
-
-              <h3 className="text-2xl font-bold mb-4 text-black">
-                AI Trend Detection
-              </h3>
-
-              <p className="text-gray-500 leading-relaxed">
-                BOTKET analyzes EUR/USD market momentum using AI-driven trend recognition for precise entries.
-              </p>
-
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-[30px] p-10 shadow-sm">
-
-              <div className="text-5xl mb-6">
-                🛡
-              </div>
-
-              <h3 className="text-2xl font-bold mb-4 text-black">
-                Smart Risk Management
-              </h3>
-
-              <p className="text-gray-500 leading-relaxed">
-                Advanced protection systems manage drawdown, lot sizing, and market volatility automatically.
-              </p>
-
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-[30px] p-10 shadow-sm">
-
-              <div className="text-5xl mb-6">
-                🤖
-              </div>
-
-              <h3 className="text-2xl font-bold mb-4 text-black">
-                24/7 Automation
-              </h3>
-
-              <p className="text-gray-500 leading-relaxed">
-                BOTKET monitors and executes trades continuously without emotional decision making.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* REGISTER */}
-      <section id="register" className="py-32 px-6 bg-white">
-
-        <div className="max-w-5xl mx-auto">
-
-          <div className="text-center mb-20">
-
-            <div className="inline-flex items-center gap-2 border border-blue-200 bg-blue-50 px-5 py-2 rounded-full text-blue-600 mb-8 font-semibold">
-              🚀 Start With BOTKET
-            </div>
-
-            <h2 className="text-5xl font-black mb-6 text-black">
-              Register For BOTKET
-            </h2>
-
-            <p className="text-gray-500 text-xl max-w-3xl mx-auto">
-              Begin your AI-powered EUR/USD automated trading journey today.
-            </p>
-
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-
-            {/* LEFT */}
-            <div className="bg-blue-50 border border-blue-100 rounded-[40px] p-10">
-
-              <h3 className="text-4xl font-black mb-8 text-black">
-                What You Get
-              </h3>
-
-              <div className="space-y-6 text-lg">
-
-                <div>
-                  ✔ AI Trading Automation
+                <div className="plan">
+                  <div className="plan-name">Pro Trader</div>
+                  <div className="plan-price">₹2,499<span>/mo</span></div>
+                  <div className="plan-note">Low-latency London/NY node, heavier EA loads</div>
+                  <ul className="specs">
+                    <li><span className="k">vCPU</span><span className="v">4 cores</span></li>
+                    <li><span className="k">RAM</span><span className="v">8 GB</span></li>
+                    <li><span className="k">Storage</span><span className="v">160 GB NVMe</span></li>
+                    <li><span className="k">OS</span><span className="v">Windows Server</span></li>
+                    <li><span className="k">MT4/MT5 setup</span><span className="v">Included</span></li>
+                  </ul>
+                  <a className="btn btn-ghost" href="https://wa.me/447448315610">Order Pro Trader</a>
                 </div>
-
-                <div>
-                  ✔ Smart Risk Protection
-                </div>
-
-                <div>
-                  ✔ MT4 Integration
-                </div>
-
-                <div>
-                  ✔ 7-Day Setup Support
-                </div>
-
               </div>
+            )}
 
-            </div>
-
-            {/* RIGHT */}
-            <div className="bg-white border border-gray-200 rounded-[40px] p-10 shadow-2xl text-center">
-
-              <h3 className="text-4xl font-black mb-4 text-black">
-                BOTKET Registration
-              </h3>
-
-              <p className="text-gray-500 text-lg mb-10">
-                Complete your registration securely using our official form.
-              </p>
-
-              <div className="space-y-5">
-
-                <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSdOCzECi585dAYgmpHwrvRwTEc0H0nXczxr9IfQWYY-NItFcg/viewform"
-                  target="_blank"
-                  className="block w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl text-xl font-black transition"
-                >
-                  Open Registration Form
-                </a>
-
-                <a
-                  href="https://wa.me/447448315610"
-                  target="_blank"
-                  className="block w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-5 rounded-2xl text-xl font-black transition"
-                >
-                  WhatsApp Support
-                </a>
-
-                <a
-                  href="https://t.me/botketsupport"
-                  target="_blank"
-                  className="block w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-5 rounded-2xl text-xl font-black transition"
-                >
-                  Telegram Community
-                </a>
-
-                <a
-                  href="/strategy.pdf"
-                  target="_blank"
-                  className="block w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-5 rounded-2xl text-xl font-black transition"
-                >
-                  View Strategy PDF
-                </a>
-
+            {tab === 'general' && (
+              <div className="plans">
+                <div className="plan">
+                  <div className="plan-name">Basic</div>
+                  <div className="plan-price">₹399<span>/mo</span></div>
+                  <div className="plan-note">Small sites, bots, background jobs</div>
+                  <ul className="specs">
+                    <li><span className="k">vCPU</span><span className="v">1 core</span></li>
+                    <li><span className="k">RAM</span><span className="v">1 GB</span></li>
+                    <li><span className="k">Storage</span><span className="v">25 GB NVMe</span></li>
+                    <li><span className="k">OS</span><span className="v">Ubuntu / Windows</span></li>
+                    <li><span className="k">Bandwidth</span><span className="v">1 TB</span></li>
+                  </ul>
+                  <a className="btn btn-ghost" href="https://wa.me/447448315610">Order Basic</a>
+                </div>
+                <div className="plan featured">
+                  <div className="plan-name">Standard</div>
+                  <div className="plan-price">₹899<span>/mo</span></div>
+                  <div className="plan-note">Apps with real traffic, small teams</div>
+                  <ul className="specs">
+                    <li><span className="k">vCPU</span><span className="v">2 cores</span></li>
+                    <li><span className="k">RAM</span><span className="v">4 GB</span></li>
+                    <li><span className="k">Storage</span><span className="v">80 GB NVMe</span></li>
+                    <li><span className="k">OS</span><span className="v">Ubuntu / Windows</span></li>
+                    <li><span className="k">Bandwidth</span><span className="v">3 TB</span></li>
+                  </ul>
+                  <a className="btn btn-primary" href="https://wa.me/447448315610">Order Standard</a>
+                </div>
+                <div className="plan">
+                  <div className="plan-name">Business</div>
+                  <div className="plan-price">₹1,799<span>/mo</span></div>
+                  <div className="plan-note">Heavier workloads, multiple services</div>
+                  <ul className="specs">
+                    <li><span className="k">vCPU</span><span className="v">4 cores</span></li>
+                    <li><span className="k">RAM</span><span className="v">8 GB</span></li>
+                    <li><span className="k">Storage</span><span className="v">160 GB NVMe</span></li>
+                    <li><span className="k">OS</span><span className="v">Ubuntu / Windows</span></li>
+                    <li><span className="k">Bandwidth</span><span className="v">5 TB</span></li>
+                  </ul>
+                  <a className="btn btn-ghost" href="https://wa.me/447448315610">Order Business</a>
+                </div>
               </div>
+            )}
+          </div>
+        </section>
 
-              <div className="mt-10 space-y-3 text-gray-500">
+        <section>
+          <div className="wrap">
+            <div className="sec-head">
+              <h2>What&apos;s included, every plan</h2>
+              <p>No hidden setup fees. No surprise throttling.</p>
+            </div>
+            <div className="feat-grid">
+              <div className="feat"><div className="k">01</div><h3>Instant deployment</h3><p>Most VPS instances are provisioned within 15–30 minutes of payment confirmation.</p></div>
+              <div className="feat"><div className="k">02</div><h3>DDoS protection</h3><p>Network-level filtering on every plan, so a bad actor doesn&apos;t take your EA or app offline.</p></div>
+              <div className="feat"><div className="k">03</div><h3>99.9% uptime</h3><p>Monitored infrastructure with automatic failover on the underlying provider network.</p></div>
+              <div className="feat"><div className="k">04</div><h3>MT4/MT5 setup help</h3><p>We install and configure your terminal on trading plans at no extra cost.</p></div>
+              <div className="feat"><div className="k">05</div><h3>Windows or Linux</h3><p>Windows Server for trading terminals, Ubuntu for apps, bots, and general workloads.</p></div>
+              <div className="feat"><div className="k">06</div><h3>Human support</h3><p>WhatsApp and Telegram support, response within 24 hours — usually much faster.</p></div>
+            </div>
+          </div>
+        </section>
 
-                <p>
-                  📧 botketsupport@gmail.com
-                </p>
+        <section id="locations">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2>Where your VPS lives</h2>
+              <p>Choose a location close to your broker&apos;s server for the shortest possible round trip.</p>
+            </div>
+            <table className="loc-table">
+              <thead>
+                <tr><th>Location</th><th>Best for</th><th>Typical broker latency</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>London (Equinix LD4)</td><td>UK/EU brokers, LMAX, IC Markets EU</td><td className="mono">0.5 – 1.5 ms</td></tr>
+                <tr><td>New York (NY4)</td><td>US brokers, FXCM, Oanda</td><td className="mono">0.8 – 2 ms</td></tr>
+                <tr><td>Singapore</td><td>Asia-Pacific brokers</td><td className="mono">1 – 3 ms</td></tr>
+                <tr><td>Mumbai</td><td>Indian brokers, general hosting</td><td className="mono">1.5 – 4 ms</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-                <p>
-                  📲 @botketsupport
-                </p>
+        <section id="deploy">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2>From order to online</h2>
+              <p>Four steps, no technical back-and-forth unless you want it.</p>
+            </div>
+            <div className="steps">
+              <div className="step"><div className="num">1</div><h3>Pick a plan</h3><p>Choose forex or general, then message us on WhatsApp to confirm.</p></div>
+              <div className="step"><div className="num">2</div><h3>Pay securely</h3><p>UPI, bank transfer, or card — we&apos;ll send a link for your plan.</p></div>
+              <div className="step"><div className="num">3</div><h3>We provision it</h3><p>Your VPS is set up and ready, usually within 15–30 minutes.</p></div>
+              <div className="step"><div className="num">4</div><h3>Get your login</h3><p>RDP or SSH details land in your inbox. Install your EA or app and go.</p></div>
+            </div>
+          </div>
+        </section>
 
-                <p>
-                  ⏱ Support Response: Within 24 Hours
-                </p>
+        <section id="faq">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2>Frequently asked questions</h2>
+            </div>
+            <div>
+              <details className="faq-item" open>
+                <summary>Does this work with MT4 and MT5?<span className="ind">+</span></summary>
+                <p>Yes. All forex plans come with Windows Server and we&apos;ll install and configure MT4 or MT5 for you at no extra charge.</p>
+              </details>
+              <details className="faq-item">
+                <summary>What&apos;s the difference between forex and general VPS?<span className="ind">+</span></summary>
+                <p>Same hardware tiers, but forex plans are provisioned in locations chosen for low latency to major broker servers and default to Windows Server for MT4/MT5. General plans default to Ubuntu and are priced for everyday hosting.</p>
+              </details>
+              <details className="faq-item">
+                <summary>Can I upgrade my plan later?<span className="ind">+</span></summary>
+                <p>Yes, you can move up a tier at any time. We prorate the difference for the current billing cycle.</p>
+              </details>
+              <details className="faq-item">
+                <summary>How fast is setup?<span className="ind">+</span></summary>
+                <p>Most orders are live within 15–30 minutes of payment during business hours. Complex setups may take longer — we&apos;ll tell you upfront.</p>
+              </details>
+              <details className="faq-item">
+                <summary>Which locations can I choose from?<span className="ind">+</span></summary>
+                <p>London, New York, Singapore, and Mumbai today. Let us know your broker and we&apos;ll recommend the closest node.</p>
+              </details>
+            </div>
+          </div>
+        </section>
 
+        <section id="contact">
+          <div className="wrap">
+            <div className="contact-band">
+              <div>
+                <h2>Ready to set up your VPS?</h2>
+                <p>Message us your plan choice and we&apos;ll have you running the same day.</p>
               </div>
-
+              <div className="contact-links">
+                <a className="btn btn-primary" href="https://wa.me/447448315610">WhatsApp</a>
+                <a className="btn btn-ghost" href="https://t.me/botketsupport">Telegram</a>
+                <a className="btn btn-ghost" href="mailto:botketsupport@gmail.com">Email</a>
+              </div>
             </div>
-
           </div>
+        </section>
 
-        </div>
-
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="py-32 px-6 bg-blue-50">
-
-        <div className="max-w-5xl mx-auto">
-
-          <div className="text-center mb-20">
-
-            <h2 className="text-5xl font-black mb-6 text-black">
-              Frequently Asked Questions
-            </h2>
-
+        <footer>
+          <div className="wrap foot-row">
+            <span>© 2026 BOTKET VPS. All rights reserved.</span>
+            <span className="mono">botketsupport@gmail.com · @botketsupport</span>
           </div>
-
-          <div className="space-y-6">
-
-            <div className="bg-white rounded-3xl p-8">
-              <h3 className="text-2xl font-bold mb-4">
-                Does BOTKET work on MT4?
-              </h3>
-
-              <p className="text-gray-600">
-                Yes, BOTKET is fully compatible with MetaTrader 4.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8">
-              <h3 className="text-2xl font-bold mb-4">
-                Is BOTKET fully automated?
-              </h3>
-
-              <p className="text-gray-600">
-                Yes, BOTKET uses AI automation for trade execution and monitoring.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8">
-              <h3 className="text-2xl font-bold mb-4">
-                Which pairs does BOTKET trade?
-              </h3>
-
-              <p className="text-gray-600">
-                BOTKET currently focuses on EUR/USD.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8">
-              <h3 className="text-2xl font-bold mb-4">
-                Do I need a VPS?
-              </h3>
-
-              <p className="text-gray-600">
-                A VPS is recommended for stable 24/7 execution.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* CONTACT */}
-      <section
-        id="contact"
-        className="py-32 px-6 text-center bg-blue-600 text-white"
-      >
-
-        <h2 className="text-5xl font-black mb-8">
-          Contact BOTKET
-        </h2>
-
-        <p className="text-blue-100 text-xl mb-12">
-          Join BOTKET AI Forex Automation
-        </p>
-
-        <div className="flex flex-wrap justify-center gap-6 mb-12">
-
-          <a
-            href="https://wa.me/447448315610"
-            target="_blank"
-            className="bg-white text-blue-600 px-10 py-5 rounded-2xl font-black text-xl"
-          >
-            WhatsApp Support
-          </a>
-
-          <a
-            href="https://t.me/botketsupport"
-            target="_blank"
-            className="bg-white text-blue-600 px-10 py-5 rounded-2xl font-black text-xl"
-          >
-            Telegram
-          </a>
-
-        </div>
-
-        <div className="space-y-4 text-lg">
-
-          <p>
-            📧 Gmail: botketsupport@gmail.com
-          </p>
-
-          <p>
-            📲 Telegram: @botketsupport
-          </p>
-
-          <p>
-            ⏱ Response Time: Within 24 Hours
-          </p>
-
-        </div>
-
-      </section>
-
-      {/* FLOATING WHATSAPP */}
-      <a
-        href="https://wa.me/447448315610"
-        target="_blank"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-5 rounded-full shadow-2xl hover:scale-110 transition text-3xl"
-      >
-        💬
-      </a>
-
-      {/* FOOTER */}
-      <footer className="border-t border-gray-200 py-10 text-center text-gray-500 bg-white">
-        © 2026 BOTKET. All rights reserved.
-      </footer>
-
-    </main>
+        </footer>
+      </div>
+    </>
   );
 }
